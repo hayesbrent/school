@@ -1,7 +1,7 @@
 // acdt.cpp
 // Brent Hayes, CISP 360
 // 07-02-2018
-//change linux
+//change linux VS test
 
 #include <iostream>
 #include <string>
