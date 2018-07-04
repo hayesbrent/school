@@ -1,13 +1,13 @@
 // acdt.cpp
 // Brent Hayes, CISP 360
 // 07-02-2018
-//change 1
- 
+//change linux
+
 #include <iostream>
 #include <string>
- 
+
 using namespace std;
- 
+
 // Specification A3 - Modularized the program
 char userInputVerify() {
   char YNVerifier;
@@ -24,7 +24,7 @@ char userInputVerify() {
   }
   return YNVerifier;
 }
- 
+
 void engineTree() {
   char tempChoice;
   cout << "Are you airborne? (Y/N)\n";
@@ -49,7 +49,7 @@ void engineTree() {
             } else {
               cout << "Turn off the Landing Light.\n";
             }
- 
+
           } else {
             cout << "Make emergency landing.\n";
           }
@@ -71,14 +71,14 @@ void engineTree() {
         cout << "Switch to other fuel tank.\n";
       }
     }
- 
+
     } else {
       cout << "Turn on the Master Switch.\n";
     }
   } else {
     cout << "Have a drink and call a mechanic.\n";
   }
- 
+
 }
 //Specification - A1 de-icing range check
 void inFlightIcing() {
@@ -96,14 +96,14 @@ void inFlightIcing() {
   } else {
     cout << "Enter a valid range please.";
   }
- 
+
 }
- 
+
 int main() {
   bool flag = true;
   char menuChoice;
- 
- 
+
+
   while(flag==true) {
     cout << "Hello Pilot, you have activated H.E.L.P.eR. what issue can I give you advice on?\n";
     cout << "C - Communications Failure\nE - Engine Failure\nI - In-flight Icing\nQ - Quit the program\n";
@@ -131,7 +131,7 @@ int main() {
       default:
         cout << "Invalid data entry. Terminating Program.\n";
         flag = false;
- 
+
     }
     cout << endl;
   }
