@@ -4,7 +4,7 @@
 
 //I wasn't able to fix a couple bugs when the program loops back around
 //tempMin & tempMax have an unrestainable precision. setprecision(x) did nothing
-//line 29 somehow gets automatic cin from restarts 'y' I tried cin.ignore() as well as cin.clear() with no success
+
 
 #include <iostream>
 #include <cstring>
@@ -30,7 +30,7 @@ string userInput() {
     bool tempflag = true;
     while (tempflag==true) {
         cout << "Please enter one of the following objects\n to convert it's temperature:\ncot, cat, cap, bat.\n";
-        getline(cin,userString);
+        cin >> userString;
         if (userString.length()!=3) {
             cout << "Invalid choice, please enter again\n";
             continue;
