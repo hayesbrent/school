@@ -184,11 +184,6 @@ int main() {
             if(tolower(userCont)!='n') {
                 cout << "I'm sorry that is not a valid input. Please type 'Y' or 'N'.\n";
             }
-        }
-        
-        
-
+        } 
     }
-
-
 }
