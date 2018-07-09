@@ -5,6 +5,8 @@
 #include <iostream>
 #include <cstring>
 #include <string>
+#include <iomanip>
+#include <iostream>
 
 using namespace std;
 //global variables for objects
@@ -14,8 +16,7 @@ using namespace std;
     const string BAT = "bat";
 
 
-string userInput() {
-   
+string userInput() { 
     string userString;
     bool tempflag = true;
 
@@ -59,7 +60,7 @@ void temperatureConvert(string userString) {
         } 
         if (userString.compare(COT)==0) {
             tempMin = 54.0;
-            tempMax = 102.0;         
+            tempMax = 80.0;         
         } 
         if (userString.compare(CAP)==0) {
             tempMin = 72.0;
@@ -79,16 +80,16 @@ void temperatureConvert(string userString) {
         }
         cout << "That value is not in the predefined range of " << tempMin << "-" << tempMax << " Fahrenheit. Please try again.\n";
     }
-    //converting user Fahrenheit to Celcius [original formula F=C*9/5+32]
-    convertC = (objectTemp * 1.8) + 32;
+    //converting user Fahrenheit to Celsius [original formula C=(F-32)*5/9]
+    convertC = (objectTemp -32.0) *(5.0/9.0);
 
-    //converting Celcius to Kelvin [Original formula K = C + 273.15]
+    //converting Celsius to Kelvin [Original formula K = C + 273.15]
     convertK = convertC + 273.15;
 
     //converting Kelvin to Rankine [Original formula R = (C + 273.15)*9/5]
     convertR = convertK * 1.8;
 
-    //converting Celcius to Newton [Original formula N = C * 33/100]
+    //converting Celsius to Newton [Original formula N = C * 33/100]
     convertN = convertC * 0.33;
 
 
@@ -96,33 +97,42 @@ void temperatureConvert(string userString) {
 
 
     while(tempflag == false) {
-        cout << "\nConvert to which of the following:\n1. Celcius\n2. Kelvin\n3. Rankine\n4. Newton\n5. All of the above.\n";
+        cout << "\nConvert to which of the following:\n1. Celsius\n2. Kelvin\n3. Rankine\n4. Newton\n5. All of the above.\n";
         cin >> userChoice;
-        switch(userChoice){
-            case 1:
-                cout << convertR << convertN;
-                cout << "1";
-                tempflag = true;
-                break;
-            case 2:
-                cout << "2";
-                tempflag = true;
-                break;           
-            case 3:
-                cout << "5";
-                tempflag = true;
-                break;  
-            case 4:
-                cout << "4";
-                tempflag = true;
-                break;  
-            case 5:
-                cout << "2";
-                tempflag = true;
-                break;  
-            default: 
-            cout << "That isn't a valid menu option please try again.";
+        if ((userChoice >=1) && (userChoice <=5)){
+            tempflag = true;
+            break;
         }
+        cout << "That isn't a valid menu option please try again.\n";
+
+    }
+    cout << left << setw(10) << "Scale" << setw(8) << "Temp" << endl;
+    switch(userChoice){
+        case 1:
+            cout << left << setw(10) << "Celsius" << setw(8) <<  fixed << showpoint  << setprecision(3)  << right << convertC << endl;
+            tempflag = true;
+            break;
+        case 2:
+            cout << left << setw(10) << "Kelvin" << setw(8) << fixed << showpoint << setprecision(3)  << right << convertK << endl;
+            tempflag = true;
+            break;           
+        case 3:
+            cout << left << setw(10) << "Rankine" << setw(8) << fixed << showpoint << setprecision(3)  << right << convertR << endl;
+            tempflag = true;
+            break;  
+        case 4:
+            cout << left << setw(10) << "Newton" << setw(8) <<  fixed << showpoint << setprecision(3)  << right << convertN << endl;
+            tempflag = true;
+            break;  
+        case 5:
+            cout << left << setw(10) << "Celsius" << setw(8) <<  fixed << showpoint  << setprecision(3)  << right << convertC << endl;
+            cout << left << setw(10) << "Kelvin" << setw(8) << fixed << showpoint << setprecision(3)  << right << convertK << endl;
+            cout << left << setw(10) << "Rankine" << setw(8) << fixed << showpoint << setprecision(3)  << right << convertR << endl;
+            cout << left << setw(10) << "Newton" << setw(8) <<  fixed << showpoint << setprecision(3)  << right << convertN << endl;
+            tempflag = true;
+            break;  
+        
+            
     }
 
     
@@ -132,11 +142,13 @@ void temperatureConvert(string userString) {
 }
 
 
-
+//main body of the program
 int main() {
     bool flag = true;
     string temp = "";
-    cout << "Hello user. This Cat, Cot, Cap Temperature Calculator is designed to convert the Fahrenheit\ntemperatures of a Cat, a Cot, a Cap, a Bat to different unit measurements(Celsius, Kelvin, Rankine).\n" << endl;
+
+    //descriptive greeting
+    cout << "Hello user. This Cat, Cot, Cap Temperature Calculator is designed to convert the Fahrenheit\ntemperatures of a Cat, a Cot, a Cap, a Bat to different unit measurements(Celsius, Kelvin, Rankine, Newton).\n" << endl;
     
 
     while(flag == true) {
