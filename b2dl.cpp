@@ -6,9 +6,9 @@
 #include <cstdio>
 #include <string>
 using namespace std;
-// Specification A2- No Globals
+// Specification A2 - No Globals
 
-//Specification B5 - Function Prototype
+// Specification B5 - Function Prototype
 int generalMenu(string, string, string);
 void A161();
 void A173();
@@ -24,7 +24,7 @@ void endGame(bool, bool, bool, bool, bool, bool);
 
 //main function
 int main () {
-    char userChoice;
+    string userChoice;
     
     bool contFlag = true;
     while (contFlag==true) {
@@ -69,17 +69,20 @@ int main () {
         endGame(flagDiplomat, flagA167, flagA290, flagA212, flagA173, flagA159);
 // Specification A3 - Game Loop
         while(true) {
-            cout << "Would you like to return to the beginning of your adventure? (Y/N)" << endl;
+            cout << "Would you like to return to the beginning of your adventure? (Yes/No)" << endl;
             cin >> userChoice;
-            if (tolower(userChoice) == 'y'){
+            for(unsigned i = 0; i <= userChoice.length();i++) {
+                userChoice[i] = tolower(userChoice[i]);
+            }
+            if ((userChoice.compare("yes")==0) || (userChoice.compare("ye")==0) || (userChoice.compare("y")==0)){
                 cout << endl;
                 break;
                 
-            } else if (tolower(userChoice) == 'n') {
+            } else if ((userChoice.compare("no")==0)||(userChoice.compare("n")==0)) {
                     contFlag = false;
                     break; 
             } else {
-                cout << "Your input was not valid. Please type Y for yes, N for no.\n";
+                cout << "Your input was not valid. Please type \"Yes\" or \"No\".\n";
             }
 
         }
@@ -101,7 +104,9 @@ int generalMenu (string choice1, string choice2, string choice3) {
         } else {
             cout << "Please type one of the following options:\n" << choice1 << ", " << choice2 << ", " << choice3 << endl;
         }
+// Specification A1 - Input Validation
         cin >> userString;
+        userString[0] = toupper(userString[0]);
         if (userString.compare(choice1)==0) {
             userChoice = 1;
             break;
@@ -202,8 +207,8 @@ bool A1() {
     return flag167;  
 }
 void endGame(bool flagDiplomat, bool flagA167, bool flagA290, bool flagA212, bool flagA173, bool flagA159) {
-//Specification B1 - Booleans
-    cout << "Current State of boolean variables:\n";
+// Specification B1 - Booleans
+    cout << "\nCurrent State of boolean variables:\n";
     cout << "Diplomat: " << flagDiplomat << endl;
     cout << "A167 Flag: " << flagA167 << endl;
     cout << "A290 Flag: " << flagA290 << endl;
