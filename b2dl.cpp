@@ -71,6 +71,7 @@ int main () {
         while(true) {
             cout << "Would you like to return to the beginning of your adventure? (Yes/No)" << endl;
             cin >> userChoice;
+// Specification A4 - Accepts all variations of proper input (Upper/lower, Yes, ye, y, No, n)
             for(unsigned i = 0; i <= userChoice.length();i++) {
                 userChoice[i] = tolower(userChoice[i]);
             }
@@ -86,9 +87,7 @@ int main () {
             }
 
         }
-    }
-
-    
+    }  
 }
 // Specification B3 - General Menu
 int generalMenu (string choice1, string choice2, string choice3) {
@@ -96,6 +95,19 @@ int generalMenu (string choice1, string choice2, string choice3) {
     int userChoice = 0; 
     while(true) {
 // Specification C2 - Simple Menu
+        if (choice1.compare("DONE")) {
+            while(true) {
+                cout << "Please type \"Done\" to finish your adventure." << endl;
+                cin >> userString;
+                for(unsigned i = 0; i <= userString.length();i++) {
+                    userString[i] = toupper(userString[i]);
+                }
+                if((userString.compare("DONE")==0)) {
+                    break;
+                }
+            }
+            break;
+        }
         if(choice2.empty()) {
             cout << "Please type " << choice1 << " to turn to page " << choice1 << endl;
         } else if (choice3.empty()) {
@@ -125,14 +137,23 @@ int generalMenu (string choice1, string choice2, string choice3) {
 }
 // Specification C1 - Individual Functions
 void A161() {
-    cout << "You have reached A161\n";
+    string sDONE = "DONE";
+    string sNull;
+    cout << "You move away from Haiken, whose hand still hovers uncertainly over the cutlery, to serve Mal rat heads. Finally Haiken makes a decision and picks up a carapace-cracking-spork. Mal chuckles at his ignorance. \"By Stygias, Captain - have you been in the field so long that you’ve forgotten the basic functions of tableware?\" Haiken grimaces. \"Pardon me, your Pettiness. I may have had a noble birth, yet life as a soldier puts me out of touch with certain niceties. We tend to eat with our hands.\" Mal laughs. \"Well, let us not stand on ceremony, Captain! I am happy to do it your way!\" Mal picks up a rat head with his hand and shovels it into his mouth. Haiken happily follows suit, munching and cracking skulls with his teeth. Inwardly, you give a sigh. No doubt with such messy fingers, Mal will stain the dragon bone. Why, you have often wondered, would anyone fashion a dining chair out of such easily blemished material as bleached porous bone? Just as you fear, Mal leans back to rest his grubby mitts upon the armrests. The CHAIR IS DIRTY. You move back to the wall while your lords eat, to remain in waiting. A butler\'s work is never\n1. Done\n";
+    generalMenu(sDONE, sNull, sNull);
 }
 
 void A173() {
+    string sDONE = "DONE";
+    string sNull;
     cout << "As they gnash away, Mal and Haiken discuss the Captain\'s recent raid on the town of Greenflower. \"Honestly,\" says Haiken, \"those wretched Brightlanders are so easily slaughtered, sometimes I almost feel bad for them.\" Mal laughs at this hilarious joke. \"Ha! That\'s a good one, Captain. But tell me, what of your primary objective\?\" \"I am pleased to report success, my lord.\" \"You have brought me a virgin\?\" \"She languishes in your dungeon even now - lovely, virtu- ous and ripe for sacrifice.\" \"Excellent. My skywatchers predict a full moon in three nights time - perfect conditions for the ceremony.\" Footsteps sound at the dining hall entrance, and a goblin messen- ger, whom you recognize as Peedy, enters wearing a feathered hat and carrying a scroll. Mal\'s gaze slides to him. \"What is it?\" Peedy clears his throat. \"Apologies for the interruption, Your Atrocious- ness. I bring you word from Vorganis Castle.\" \"Oh?\" Mal\'s tone is so instantly cold that the very temperature of the room seems to drop. \"Er... yes, my lord. Lord Nefarian accepts your kind invitation to attend the Stygias Ceremony, and intends to arrive tomorrow morn- ing.\" Mal\'s eyes narrow. You know he does not care for his cousin Nefarian, not least because the man is next in line to the throne. Ne- farian\'s presence at the ceremony, however, must be tolerated, for he is a powerful lord in his own right, with many allies amongst Noc- turnia\'s nobility - a fact which Mal does not enjoy being reminded of. \"Why bring me such news at lunch\?\" he growls. \"It has put a foul taste in my mouth and sullied my food.\" He drums his fingers on the dragon bone armrest, and fiery sparks flare at his fingertips. Peedy quails, for he knows that Mal is prone to taking out his anger on the bearers of bad news. It would be a shame, however (and a staffing issue), to lose a competent messenger to a moment of ill temper over something that really isn\'t his fault.\n1. Do you attempt to intercede on Peedy\'s behalf\? \n2. Or abandon him to his miserable fate\?" << endl;
+    generalMenu(sDONE, sNull, sNull);
 }
 void A159() {
-    cout << "You have reached A159\n";
+    string sDONE = "DONE";
+    string sNull;
+    cout << "You clear your throat and speak softly. \"That little one there is your rat-head-eating-fork, my lord.\" Despite your attempt to be sub- tle, Mal registers the exchange and chortles. Haiken, embarrassed to be found ignorant, frowns. \"I know what fork to use, you stupid butler! Begone before I stab you in the eye with it.\" With your lords served, you move back from the table to remain in waiting. Somehow you doubt Haiken\'s bedclothes will be properly turned.\n1. Done";
+    generalMenu(sDONE, sNull, sNull);
 }
 void A212() {
     
@@ -161,7 +182,7 @@ int A13(bool flagDiplomat) {
 void A290() {
     string sA161 = "A161";
     string sNull;
-    cout << "You have reached A290\n";
+    cout << "As is only fitting, you serve your master first. As you place the largest and juiciest rat heads before him, your first footman Kalag - a young fellow who shows much promise - moves to Haiken and starts laying slug meat on his plate. \"Er,\" says Haiken, \"not too much slug for me, thank you - I have an allergy.\" Mal, who is in mid-chew, scoffs, and shoots a shard of half-chewed rat skull out of his nostril to ping off a wine glass. \"Rut me, Haiken,\" he says. \"I’ve seen you rip the throat from a charging horse, yet you can\'t stomach a little slug\?\" Haiken seems embarrassed. \"They give me hives, my lord.\" \"Ha! Well, better get over there with some of his precious rat heads, Mr Artanon.\" You do as you are bid, and place the remaining rat heads on Haiken\'s plate. They are a little on the smaller side, and you notice a wistful look in Haiken\'s eye as Mal lifts another plump one to his mouth. With your lords served, you move back from the table to remain in waiting.\n1. Excellent posture, Mr Artanon. (turn to A161)\n";
     generalMenu(sA161, sNull, sNull);
     A161();
 }
