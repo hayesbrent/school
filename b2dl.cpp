@@ -27,7 +27,7 @@ int main () {
     string userChoice;
     
     bool contFlag = true;
-    while (contFlag==true) {
+    while (contFlag) {
         int userA13choice = 0;
         //page flags
         bool flagA167 = false;
@@ -41,7 +41,7 @@ int main () {
         //begin story
 
         flagA167 = A1();
-        if (flagA167==true) {
+        if (flagA167) {
             flagDiplomat = true;
             A167();
         } else {
@@ -171,7 +171,7 @@ int A13(bool flagDiplomat) {
     string sA159 = "A159";
     string sNull;
 // Specification B4 - Valid choices only
-    if (flagDiplomat == true) {
+    if (flagDiplomat) {
         generalMenu(sA212, sNull, sNull);
         userChoice = 3;
     } else {
@@ -239,23 +239,23 @@ void endGame(bool flagDiplomat, bool flagA167, bool flagA290, bool flagA212, boo
 
 // Specification B2 - Path
     cout << "\nRoute taken:\n";
-    if (flagA167 == 1) {
+    if (flagA167) {
         cout << "A1-> A167-> A232-> ";
     } else {
         cout << "A1-> A100-> A232-> ";
     }
-    if (flagA290 == 1) {
+    if (flagA290) {
         cout << "A290-> A161\n";
     } else {
         cout << "A13-> ";
     }
-    if (flagA212 == 1) {
+    if (flagA212) {
         cout << "A212-> A161\n";
     }
-    if (flagA173 == 1) {
+    if (flagA173) {
         cout << "A173\n";
     }
-    if (flagA159 == 1) {
+    if (flagA159) {
         cout << "A159\n";
     }
    
