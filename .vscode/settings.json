@@ -6,6 +6,7 @@
         "iostream": "cpp",
         "iomanip": "cpp",
         "array": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "*.tcc": "cpp"
     }
 }
