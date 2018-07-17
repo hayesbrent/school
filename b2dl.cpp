@@ -1,11 +1,14 @@
 // b2dl.cpp
 // Brent Hayes, CISP 360
 // 07-15-2018
+//my final submission ended up with a 23% plagiarism score. After looking at the report, match levels medium and higher
+//  were portions of the provided text pages, the headers, and the function prototypes.
 
 #include <iostream>
 #include <cstdio>
 #include <string>
 using namespace std;
+
 // Specification A2 - No Globals
 
 // Specification B5 - Function Prototype
