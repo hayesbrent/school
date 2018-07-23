@@ -23,7 +23,6 @@ int main() {
     int startInfo =0;
     int menuChoice=0;
     int quitProgram=0; 
-    int playAgain = 0;
     int tempInfo = 0;
     int victoryState = 0;
     int startPlayer = 0;
@@ -31,18 +30,23 @@ int main() {
     int scoreKeepAI = 0;
     int scoreKeepPlayer =0;
     int scoreKeepDraw = 0;
+    int restartFlag = 0;
 
+// Specification A1 - Main Game Loop
     do{
         if(turnCount==0) {
-            cout <<  "Welcome to tic tac toe! This a Player vs AI program featuring the infamous tic tac toe game." << endl;
+            
             while(true) {
-                if (playAgain !=0) {
-                    playAgain = 0;
-                    break;
-
-                }
+                if (restartFlag!=0) {
+                startInfo = beginning();
+                startPlayer = startInfo;
+                break;
+            }
+                 cout <<  "Welcome to tic tac toe! This a Player vs AI program featuring the infamous tic tac toe game." << endl;
+// Specification B1 - Start Menu
                 cout << "Please select from one of the following options:\n1 - Explain the Game\n2 - Play\n3 - Quit" << endl;
                 cin >> menuChoice;
+// Specification B2 - Valid Menu Choices
                 if (menuChoice == 1) {
                     cout << "Tic Tac Toe is a game where you choose one of the squares on a 3x3 grid." << endl;
                     cout << "The first player to connect 3 of the squares together horizontally, vertically, or diagonally wins." << endl;
@@ -97,6 +101,7 @@ int main() {
                 cout << "The match has ended in a draw." << endl;
                 scoreKeepDraw++;
             }
+// Specification A4 - Play by play
             cout << "The turn order was:" << endl;
             for(int i = 0; i <turnCount; i++){
                 cout << "Turn " << i << " ";
@@ -116,14 +121,14 @@ int main() {
                 }
             }
             cout << endl;
-            cout << "Current score is:" << endl;
-            cout << "Player: " << scoreKeepPlayer << " || " << "AI: " << scoreKeepAI << " || Draws: " << scoreKeepDraw << endl;
 
             while (true) {
+// Specification A2 - Simple Prompt
                 cout << "\nwould you like to restart?(Y/N)" << endl;
                 cin >> restartChoice;
                 if(tolower(restartChoice) == 'y') {
                     turnCount =0;
+                    restartFlag = 1;
                     for(int i = 0; i <9;i++){
                         board[i] = '0' +(i*1);
                     }
@@ -131,6 +136,9 @@ int main() {
                     
                 } else if(tolower(restartChoice)== 'n') {
                     quitProgram++;
+// Specification A3 - Keep Score
+                    cout << "Current score is:" << endl;
+                    cout << "Player: " << scoreKeepPlayer << " || " << "AI: " << scoreKeepAI << " || Draws: " << scoreKeepDraw << endl;
                     break;
                 } else {
                     cout << "Invalid Selection, please try again" << endl;
@@ -144,6 +152,8 @@ int main() {
     } while(true);
 }
 
+// Specification B3 - Pretty Display
+// Specification C2 - Simple Display
 void boardDisplay(char board[9]) {
     cout << "-------------" << endl;
     cout << "| " << board[0] << " | " << board[1] << " | " << board[2] << " |" << endl;
@@ -153,7 +163,7 @@ void boardDisplay(char board[9]) {
     cout << "| " << board[6] << " | " << board[7] << " | " << board[8] << " |" << endl;
     cout << "-------------" << endl;
 }
-
+// Specification C4 - Decide Winner
 int winCheck(char board[9]) {
     //1 for Player Victory, 2 for AI Victory
     
@@ -194,7 +204,7 @@ int winCheck(char board[9]) {
     }
 }
 
-
+// Specification B4 - Valid Move
 int gameInputValidation(char board[9], int startInfo) {
     int tempInput;
     //0 for player
@@ -209,6 +219,7 @@ int gameInputValidation(char board[9], int startInfo) {
             }
 
         }
+// Specification C3 - AI
     } else { //AI turn
         unsigned seed;
         seed = time(0);
@@ -229,6 +240,7 @@ int beginning(){
     unsigned seed;
     seed = time(0);
     srand(seed);
+// Specification C1 - Random Start
     if((rand()%2) == 0) {
         cout << "The player will begin the game first." << endl;
         return 0;
