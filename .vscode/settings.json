@@ -7,6 +7,8 @@
         "iomanip": "cpp",
         "array": "cpp",
         "string_view": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "ostream": "cpp",
+        "initializer_list": "cpp"
     }
 }
