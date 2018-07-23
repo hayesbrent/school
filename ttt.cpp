@@ -1,6 +1,7 @@
 // ttt.cpp
 // Brent Hayes, CISP 360
 // 07-22-2018
+// Plagiarism Checker showed a 10% match. the only matches (medium) were the headers at the top and the boardDisplay, and part of winCheck function
 
 #include <iostream>
 #include <cstdlib>
