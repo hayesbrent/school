@@ -21,12 +21,14 @@ string noun1Validation();
 string verb3Smallest();
 string phraseValidation(int);
 string basicGet(int);
+int integerGet();
 
 int main() {
     int firstIteration = 0;
     int userQuit = 0;
     string temp[20];
     float tempUse;
+    int integerTemp =0;
 
 // Specification A1 - Main Game Loop
     do{
@@ -56,15 +58,16 @@ temp[14] = basicGet(4);
 temp[15] = basicGet(2);
 temp[16] = basicGet(4);
 temp[17] = phraseValidation(3);
-temp[18] = basicGet(6);
-temp[19] = verb5Validation();
+integerTemp = integerGet();
+temp[18] = verb5Validation();
 tempUse = randomFloat();
+
 
 cout << "Every " << temp[0] << ", I wake up and get off my " << temp[1] << ". I don't always have time to " << temp[2] << " a shower, but I always make sure to " << temp[3] 
     << " my hair. Once that's done I get some " << temp[4] << ", and then it's off to my first " << temp[5] << ". I often get caught " << temp[6] << " in class. No one likes it when the " << temp[7]
     << " gives a surprise " << temp[8] << ". My second class is " << temp[9] << " Theory. Dr. " << temp[10] << " is incredibly " << temp[11] << ", but I never " << temp[12] << " her because of her thick "
     << temp[13] << ". Her " << temp[14] << ", however, are really " << temp[15] << ". After lunch, I have no more " << temp[16] << " and I'm free to " << temp[17] << " my friends. This is right around "
-    << temp[18] << "O' clock. Before I go to bed I " << temp[19] << " a little bit, in my room, " << tempUse << endl;
+    << integerTemp << "O' clock. Before I go to bed I " << temp[18] << " a little bit, in my room, " << fixed << setprecision(1) << tempUse << endl;
 
 //madlibs end
     } while(true);
@@ -247,7 +250,6 @@ string phraseValidation(int variationTest) {
 string basicGet(int variation) {
     cin.ignore();
     string userTempInput;
-    int userTempInt =0;
 
     if (variation == 0) {
         cout << "Please enter a verb:" << endl;
@@ -261,20 +263,23 @@ string basicGet(int variation) {
         cout << "Please enter a plural noun:" << endl;
     } else if (variation == 5) {
         cout << "Please enter a time span:" << endl;
-    } else if (variation == 6) {
-        while (true) {
-            cout << "Please enter a single integer 1-12" << endl;
-            cin >> userTempInt;
-            if ((userTempInt>=1) && (userTempInt <=12)) {
-                userTempInput = std::to_string(userTempInt);
-            }
-            cout << "Invalid selection please try again." << endl;
-        }
-    }
+    } 
     cin >> userTempInput;
     for (unsigned int i = 0; i < userTempInput.length(); i++) { 
         userTempInput[i] = tolower(userTempInput[i]);
     }
     return userTempInput;
     
+}
+int integerGet() {
+    cin.ignore();
+    int userTempInt = 0;
+    while (true) {
+        cout << "Please enter a single integer 1-12" << endl;
+        cin >> userTempInt;
+        if ((userTempInt>=1) && (userTempInt <=12)) {
+            return userTempInt;
+        }
+        cout << "Invalid selection please try again." << endl;
+    }
 }
