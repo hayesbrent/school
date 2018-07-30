@@ -1,7 +1,9 @@
 // madlibs.cpp
 // Brent Hayes, CISP 360
 // 07-29-2018
-
+//I reviewed the plagiarism checker after turning in the assignment. I got a score of 10%
+// what seemed to trigger it were the headers, randomWord() module, wordMenu() module, and a part of noun1Validation() module. Everything besides the headers was very lightly highlighted.
+//Potential Problems: I keep running into an extra line buffer needed for getline. purging it out wasn't effective. not sure what to do.
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
