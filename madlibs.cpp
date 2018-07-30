@@ -272,7 +272,6 @@ string basicGet(int variation) {
     
 }
 int integerGet() {
-    cin.ignore();
     int userTempInt = 0;
     while (true) {
         cout << "Please enter a single integer 1-12" << endl;
