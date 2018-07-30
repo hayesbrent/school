@@ -3,11 +3,20 @@
 // 07-29-2018
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <cstring>
+#include <iomanip>
 using namespace std;
 
 //prototype functions
 
 int simpleMenu(int);
+string randomWord();
+float randomFloat();
+string simpleMenu();
+string verb5Validation();
+string noun1Validation();
 
 int main() {
     int firstIteration = 0;
@@ -22,7 +31,6 @@ int main() {
         }
 
 //madlibs start        
-
 
 //madlibs end
     } while(true);
@@ -64,6 +72,90 @@ int simpleMenu(int firstIteration) {
             } else {
                 cout << "Invalid choice, please enter Y for Yes, N for No." << endl;
             }
+        }
+    }
+}
+
+// Specification C1 - Random Word
+string randomWord() {
+    int temp = 0;
+    string rando[3] = {"comb", "paint", "remove"};
+    unsigned seed;
+    seed = time(0);
+    srand(seed);
+    temp = rand()%3;
+    return rando[temp];
+
+}
+
+// Specification C2 - Random Float
+float randomFloat() {
+    unsigned seed;
+    seed = time(0);
+    srand(seed);
+    float temp = ((float)rand()/(float)RAND_MAX) *15.0;
+    if(temp <= 0.044) {
+        temp = 0.0;
+    }
+    return temp;
+}
+
+// Specification B4 - Simple Menu
+string simpleMenu() {
+    string userMenuChoice[3] = {"breakfast", "fishes", "copper coins"};
+    string userTempInput;
+    cin.ignore();
+    while(true) {
+        cout << "Please choose between " << userMenuChoice[0] << ", " <<userMenuChoice[2] << ", " << userMenuChoice[1] << endl;
+        
+        
+        getline(cin,userTempInput);
+        for( unsigned int i = 0; i < userTempInput.length(); i++) {
+            userTempInput[i] = tolower(userTempInput[i]);
+        }
+        for (int i = 0; i < 3; i++) {
+            if (userTempInput.compare(userMenuChoice[i])==0) {
+                return userTempInput;
+            }
+        }
+       
+        cout << "Invalid Input, please try again." << endl;
+    }
+
+}
+
+// Specification B3 - Range Validation
+string verb5Validation() {
+    string userTempInput;
+    cin.ignore();
+    while(true) {
+        cout << "Please enter a verb that is between 4-20 characters in length." << endl;
+        cin >> userTempInput;
+        if ((userTempInput.length() >4)&&(userTempInput.length()<20)) {
+            for (unsigned int i = 0; i < userTempInput.length(); i++) { 
+                userTempInput[i] = tolower(userTempInput[i]);
+            }
+            return userTempInput;
+        } else {
+            cout << "Invalid Input, please try again." << endl;
+        }
+    }
+}
+
+// Specification B2 - Maximum Word Size Validation
+string noun1Validation() {
+    string userTempInput;
+    cin.ignore();
+    while(true) {
+        cout << "Please enter a noun that is less than 16 characters in length." << endl;
+         cin >> userTempInput;
+        if (userTempInput.length() <16) {
+            for (unsigned int i = 0; i < userTempInput.length(); i++) { 
+                userTempInput[i] = tolower(userTempInput[i]);
+            }
+            return userTempInput;
+        } else {
+            cout << "Invalid Input, please try again." << endl;
         }
     }
 }
