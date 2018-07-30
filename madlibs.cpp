@@ -17,10 +17,14 @@ float randomFloat();
 string simpleMenu();
 string verb5Validation();
 string noun1Validation();
+string verb3Smallest();
+string phraseValidation(int);
+string basicGet(int);
 
 int main() {
     int firstIteration = 0;
     int userQuit = 0;
+    string temp;
 
 // Specification A1 - Main Game Loop
     do{
@@ -31,7 +35,8 @@ int main() {
         }
 
 //madlibs start        
-
+temp =phraseValidation(0);
+cout << temp;
 //madlibs end
     } while(true);
 }
@@ -118,7 +123,6 @@ string simpleMenu() {
                 return userTempInput;
             }
         }
-       
         cout << "Invalid Input, please try again." << endl;
     }
 
@@ -158,4 +162,70 @@ string noun1Validation() {
             cout << "Invalid Input, please try again." << endl;
         }
     }
+}
+
+// Specification A3 - Smallest Word
+string verb3Smallest() {
+    string userTempInput;
+    cin.ignore();
+    string userEntry1;
+    string userEntry2;
+    while(true) {
+        cout << "Please enter a verb:" << endl;
+        cin >> userEntry1;
+        cout << "Please enter another verb:" << endl;
+        cin >> userEntry2;
+        if (userEntry1.length() < userEntry2.length()) {
+            for (unsigned int i = 0; i < userEntry1.length(); i++) { 
+                userEntry1[i] = tolower(userEntry1[i]);
+            }
+            return userEntry1;
+        } else {
+             for (unsigned int i = 0; i < userEntry2.length(); i++) { 
+                userEntry2[i] = tolower(userEntry2[i]);
+            }
+            return userEntry2;
+        }
+    }
+}
+
+// Specification B1 - Phrase Validation
+string phraseValidation(int variationTest) {
+    cin.ignore();
+    string userTempInput;
+    char c;
+    while(true) {
+        if (variationTest == 0) {
+            cout << "Please enter a famous person (First Last)" << endl;
+        } else {
+            cout << "Please enter a 2 word occupation" << endl;
+        }
+        getline(cin,userTempInput);
+        for (unsigned int i = 0; i < userTempInput.length(); i++) {
+            c = userTempInput[i];
+            if (isspace(c)) {
+                return userTempInput;
+            }
+        }
+        cout << "Invalid Input, please try again." << endl;
+    }
+
+}
+
+string basicGet(int variation) {
+    cin.ignore();
+    string userTempInput;
+
+    if (variation == 0) {
+        cout << "Please enter a verb:" << endl;
+    } else if (variation == 1) {
+        cout << "Please enter a noun:" << endl;
+    } else if (variation == 2) {
+        cout << "Please enter an adjective:" << endl;
+    }
+    for (unsigned int i = 0; i < userTempInput.length(); i++) { 
+        userTempInput[i] = tolower(userTempInput[i]);
+    }
+    return userTempInput;
+    
 }
