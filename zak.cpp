@@ -2,6 +2,10 @@
 // Brent Hayes, CISP 360
 // 08-05-2018
 
+
+//note: I was unable to create a pseudo style array using structs, and since I was not allowed to use vectors, I used a restricting parameter as a compromise.
+//  if there is a way to dynamically change an array contained within a struct I'd very much like to know.
+
 #include <iostream>
 #include <iomanip>
 #include <string> 
@@ -32,7 +36,7 @@ int main() {
     int testQuantity;
     int countLoop = 0; 
     char zakChoice;
-    bool flag = true;
+    
 
     introduction();
 // Specification A2 - Number of Students Prompt
@@ -47,41 +51,21 @@ int main() {
    students = new GradeBook[classSize];
    
 // Specification A1 - Main Student Loop
-    do{
-        while(countLoop < classSize) {
-            students[countLoop].name = nameEntry(countLoop);
-            for(int i =0; i < testQuantity; i++) {
-                students[countLoop].test[i] = testEntry(i);
-            }
-            countLoop++;
-
+    while(countLoop < classSize) {
+        students[countLoop].name = nameEntry(countLoop);
+        for(int i =0; i < testQuantity; i++) {
+            students[countLoop].test[i] = testEntry(i);
         }
-        classAverage(students, classSize, testQuantity);
+        countLoop++;
+    }
+    classAverage(students, classSize, testQuantity);
 
-        for (int i = 0; i <classSize; i++) {
-            sortTest(students, i, testQuantity);
-            calcAVG(students, i, testQuantity);
-        }
+    for (int i = 0; i <classSize; i++) {
+        sortTest(students, i, testQuantity);
+        calcAVG(students, i, testQuantity);
+    }
 
-        printSummary(students, classSize, testQuantity);
-        while (true) {
-            cout << "Would you like to enter a new class Professor Zak? (Y/N)" << endl;
-            cin >> zakChoice;
-            if (tolower(zakChoice) == 'y') {
-                cout << "Enter the class size:" << endl;
-                cin >> classSize;
-                cout << "How many tests were there?" << endl;
-                cin >> testQuantity;
-            } else if (tolower(zakChoice) == 'n') {
-                flag = false;
-                break;
-            } else {
-                cout << "Invalid choice, please try again." << endl;
-            }
-        }
-
-
-    }while(flag ==true);
+    printSummary(students, classSize, testQuantity);
     
 }
 
@@ -122,7 +106,7 @@ int testEntry(int testNumber) {
 }
 
 void calcAVG(struct GradeBook * students, int index, int testQuantity) {
- 
+// Specification B2 - Drop Lowest 
     double tempSum = 0;
     if(testQuantity >=4) {
             for (int i = 0; i <(testQuantity-3);i++) {
@@ -145,12 +129,12 @@ void calcAVG(struct GradeBook * students, int index, int testQuantity) {
     }
 }
 
-
+// Specification C1 - Student Summary
 void printSummary(struct GradeBook * students, int classSize, int testQuantity) {
     cout << endl;
     for(int i = 0; i < classSize; i++) {
         cout << "Student: " << students[i].name << endl;
-        cout << "Test Scores: ";
+        cout << "Test Scores(out of " << testQuantity << " total tests): ";
 
         for( int j = 0; j < testQuantity; j++) {
 // Specification B3 - Signify Dropped                        
@@ -164,12 +148,14 @@ void printSummary(struct GradeBook * students, int classSize, int testQuantity) 
                  cout << " || ";
             }
         }
+
         cout << endl;
         cout << "Student Grade: ";
         studentGrade(students, i);
         cout << endl;
         
     }  
+// Specification A3 - Class Stats
     cout << "Class Average:" <<endl;
     for(int i = 0; i < testQuantity; i++) {
         cout << "Test #" << (i+1) << ": " << students[i].classTestAverage;
