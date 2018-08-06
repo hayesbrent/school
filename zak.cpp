@@ -1,7 +1,7 @@
 // zak.cpp
 // Brent Hayes, CISP 360
 // 08-05-2018
-
+//Plagiarism Checker: I received a score of 5%. Oddly my only match through the ENTIRE program was line 46 and 47. which was the comment for Specific@tion B1. and part of a cout line.
 
 //note: I was unable to create a pseudo style array using structs, and since I was not allowed to use vectors, I used a restricting parameter as a compromise.
 //  if there is a way to dynamically change an array contained within a struct I'd very much like to know.
