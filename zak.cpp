@@ -35,8 +35,6 @@ int main() {
     int classSize;
     int testQuantity;
     int countLoop = 0; 
-    char zakChoice;
-    
 
     introduction();
 // Specification A2 - Number of Students Prompt
