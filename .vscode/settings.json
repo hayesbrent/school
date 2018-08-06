@@ -11,6 +11,9 @@
         "ostream": "cpp",
         "initializer_list": "cpp",
         "ctime": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp"
     }
 }

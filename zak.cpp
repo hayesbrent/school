@@ -11,25 +11,28 @@ using namespace std;
 struct GradeBook {
     string name;
     string grade;
-    double GPA;
+    double AVG;
     int test[100];
-    int droppedTest1;
-    int droppedTest2;
-    int droppedTest3;
+    double classTestAverage;
 };
 
 void introduction();
 string nameEntry(int);
 int testEntry(int);
-void calcGPA(GradeBook *students, int, int, int);
+void calcAVG(GradeBook *students, int, int);
 void printSummary(GradeBook * students, int, int);
 void dropTest(GradeBook * students, int, int);
+void sortTest(GradeBook * students, int, int);
+void classAverage(GradeBook * students, int, int);
+void studentGrade(GradeBook * students, int);
 
 int main() {
    
     int classSize;
     int testQuantity;
     int countLoop = 0; 
+    char zakChoice;
+    bool flag = true;
 
     introduction();
 // Specification A2 - Number of Students Prompt
@@ -50,21 +53,40 @@ int main() {
             for(int i =0; i < testQuantity; i++) {
                 students[countLoop].test[i] = testEntry(i);
             }
-            calcGPA(students, countLoop, testQuantity, classSize);
-            if(testQuantity >=4) {
-                dropTest(students, countLoop, testQuantity);
-            }
             countLoop++;
-        }
-        printSummary(students, classSize, testQuantity);
-        break;
 
-    }while(true);
+        }
+        classAverage(students, classSize, testQuantity);
+
+        for (int i = 0; i <classSize; i++) {
+            sortTest(students, i, testQuantity);
+            calcAVG(students, i, testQuantity);
+        }
+
+        printSummary(students, classSize, testQuantity);
+        while (true) {
+            cout << "Would you like to enter a new class Professor Zak? (Y/N)" << endl;
+            cin >> zakChoice;
+            if (tolower(zakChoice) == 'y') {
+                cout << "Enter the class size:" << endl;
+                cin >> classSize;
+                cout << "How many tests were there?" << endl;
+                cin >> testQuantity;
+            } else if (tolower(zakChoice) == 'n') {
+                flag = false;
+                break;
+            } else {
+                cout << "Invalid choice, please try again." << endl;
+            }
+        }
+
+
+    }while(flag ==true);
     
 }
 
 void introduction() {
-    cout << "Welcome to zak.cpp. This program's function is to prompt the user for class size, student names, and test scores. After all data has been entered, the program will output the student's name, all test scores, their GPA, letter grade, and lastly a few words of advice." << endl;
+    cout << "Welcome to zak.cpp. This program's function is to prompt the user for class size, number of tests, student names, and test scores. After all data has been entered, the program will output the student's name, all test scores, their GPA, letter grade, and lastly a few words of advice." << endl;
 }
 
 // Specification C2 - Student Name
@@ -72,7 +94,7 @@ string nameEntry(int studentNumber) {
     string studentName;
     char c;
     while(true) {
-        cout << "Enter the student #" << (studentNumber+1) << "'s first and last name on one line. (Ex. Mary Waterfall)." << endl;
+        cout << "\nEnter the student #" << (studentNumber+1) << "'s first and last name on one line. (Ex. Mary Waterfall)." << endl;
         cin.ignore();
         getline(cin,studentName);
         for (unsigned int i = 0; i < studentName.length(); i++) {
@@ -94,98 +116,126 @@ int testEntry(int testNumber) {
         if ((tempTest>=0)&&(tempTest<=100)) {
             return tempTest;
         }
-        cout << "Invalid entry, try agian." << endl;
+        cout << "Invalid entry, try again." << endl;
     }
 
 }
 
-void calcGPA(struct GradeBook * students, int index, int testQuantity, int classSize) {
-  //need to add dropped test scores
-
+void calcAVG(struct GradeBook * students, int index, int testQuantity) {
+ 
     double tempSum = 0;
-    for (int i = 0; i < testQuantity; i++) {
-        tempSum += students[index].test[i];
+    if(testQuantity >=4) {
+            for (int i = 0; i <(testQuantity-3);i++) {
+                tempSum += students[index].test[i];
+            }
+              
+    } else {
+        for (int i = 0; i < testQuantity; i++) {
+        
+            tempSum += students[index].test[i];
+        }
     }
-    tempSum /= testQuantity;
-    students[index].GPA = tempSum;
+    if(testQuantity >=4) {
+        tempSum = tempSum / (testQuantity-3);
+        students[index].AVG = tempSum;
+
+    } else {
+        tempSum /= testQuantity;
+        students[index].AVG = tempSum;
+    }
 }
+
 
 void printSummary(struct GradeBook * students, int classSize, int testQuantity) {
-    
+    cout << endl;
     for(int i = 0; i < classSize; i++) {
         cout << "Student: " << students[i].name << endl;
-        for( int j = 0; j < testQuantity; j++) {
+        cout << "Test Scores: ";
 
-            cout << "Test #" << (j+1) << ": " << students[i].test[j];
-            if ((j==students[j].droppedTest1)||(j==students[j].droppedTest2)||(j==students[j].droppedTest3)) {
-                cout << " (DROPPED) ";
+        for( int j = 0; j < testQuantity; j++) {
+// Specification B3 - Signify Dropped                        
+            cout << students[i].test[j];
+            if (testQuantity >=4) {
+                if (j>= (testQuantity-3)) {
+                    cout << " (DROPPED)";
+                }  
             }
             if (j+1 != testQuantity) {
                  cout << " || ";
             }
-
         }
         cout << endl;
-        cout << "Student GPA: " << students[i].GPA << endl;
+        cout << "Student Grade: ";
+        studentGrade(students, i);
         cout << endl;
+        
     }  
-}
-
-void dropTest(struct GradeBook * students, int index, int testQuantity) {
-
-    int temp =0;
-    int switchTemp = 0;
-    int dropTemp1 =101;
-    int dropTemp2 =101;
-    int dropTemp3 =101;
-    int index1 = 0;
-    int index2 = 0;
-    int index3 = 0;
-    int switchIndex = 0;
-    int tempSwitchIndex =0;
-
+    cout << "Class Average:" <<endl;
     for(int i = 0; i < testQuantity; i++) {
-        temp = students[index].test[i];
-        if(temp < dropTemp1) {
-            switchIndex = index1;
-            index1 =i;
-            switchTemp = dropTemp1;
-            dropTemp1 = temp;
-            temp = switchTemp;
-
-            if(temp < dropTemp2) {
-                tempSwitchIndex = index2;
-                index2 = switchIndex;
-                switchIndex = tempSwitchIndex;
-
-                switchTemp = dropTemp2;
-                dropTemp2 = temp;
-                temp = switchTemp;
-                if (temp < dropTemp3) {
-                    index3 = switchIndex;
-                    dropTemp3 = temp;
-                }
-            }
-        } else if(temp < dropTemp2) {
-            switchIndex = index2;
-            index2 = i;
-            switchTemp = dropTemp2;
-            dropTemp2 = temp;
-            temp = switchTemp;
-            if (temp < dropTemp3) {
-                    index3 = switchIndex;
-                    dropTemp3 = temp;
-            }
-
-        } else if(temp < dropTemp3) {
-            index3 = i;
-            dropTemp3 = temp;
-            
+        cout << "Test #" << (i+1) << ": " << students[i].classTestAverage;
+        if( i+1 != testQuantity) {
+            cout << " || ";
         }
     }
+    cout << endl;
+}
 
-    students[index].droppedTest1 =index1;
-    students[index].droppedTest2 =index2;
-    students[index].droppedTest3 =index3;
+
+
+// Specification B4 - Sorted Output
+void sortTest(struct GradeBook * students, int index, int testQuantity) {
+    int temp=0;
+    int x =0;
+    bool swap = true;
+
+    while (swap) {
+        swap = false;
+        x++;
+
+        for (int i = 0; i < testQuantity-x; i++) {
+            if(students[index].test[i]< students[index].test[i+1]) {
+                temp = students[index].test[i];
+                students[index].test[i] = students[index].test[i+1];
+                students[index].test[i+1] = temp;
+                swap = true;
+
+            }
+        } 
+    } 
+}
+
+void classAverage(struct GradeBook * students, int classSize, int testQuantity) {
+    double temp = 0.0;
+    for(int i = 0; i < testQuantity; i++) {
+        for(int j = 0; j < classSize; j++) {
+           temp += students[j].test[i];
+
+        }
+        students[i].classTestAverage = temp/classSize;
+        temp = 0.0;
+    }
+}
+
+// Specification C4 - GPA Advice
+void studentGrade(struct GradeBook * students, int index) {
+    double temp = 0.0;
+    temp = students[index].AVG;
+
+    if (temp>=90.0) {
+        cout << "A" << endl;
+        cout << "Wow, excellent job! You've done very well, keep up the hard work!" << endl;
+    } else if (temp>=80.0) {
+        cout << "B" << endl;
+        cout << "Good effort, but you can do better. Push yourself even further and you'll make it to the top." << endl;
+    } else if (temp>=70.0) {
+        cout << "C" << endl;
+        cout << "Acceptable performance. There are a lot of areas you can improve on to better yourself." << endl;   
+    } else if (temp>=60.0) {
+        cout << "D" << endl;
+        cout << "Nearly acceptable, but not quite enough. You will need to put a lot more effort and time into your studies to pass the course." << endl;
+    } else {
+        cout << "F" << endl;
+        cout << "Unfortunately not even close to passing. You'll need to dedicate much more effort to the class to even pass. You might be better off taking it again next semester." << endl;
+    }
 
 }
