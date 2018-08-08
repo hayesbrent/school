@@ -12,12 +12,24 @@ struct monsterInfo {
     int health;
     int strength;
 };
+struct playerInfo {
+    string name;
+    int health = 200;
+    int strength = 15;
+
+};
+
 void monsterPopulate(monsterInfo *monster);
 
 
 int main() {
     monsterInfo *monster;
    monster = new monsterInfo[5];
+
+
+   monsterPopulate(monster);
+
+
 }
 
 //populates monster basic information. name, health, strength
@@ -30,6 +42,6 @@ void monsterPopulate(struct monsterInfo * monster) {
         {"Rock Lobster", 100, 10}
 
     };
-
 }
+
 
