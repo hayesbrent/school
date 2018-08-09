@@ -50,12 +50,11 @@ int main() {
         {"Rock Lobster", 100, 10}
 
     };
-    int roomstate[8];
+    int roomstate[8] = {0,0,0,0,0,0,0,0};
+    
 
     introduction(player);
-   int test = 0;
-   test = monsterSelect();
-    cout << test;
+   
     
 
 }
