@@ -23,15 +23,16 @@ struct playerInfo {
 
 //void monsterPopulate(monsterInfo *monster);
 int monsterSelect();
-void floor1();
-void floor2a();
-void floor2b();
-void floor2c();
-void floor3a();
-void floor3b();
-void floor3c();
-int floor3();
+void floor1(playerInfo &, int [10]);
+void floor2a(playerInfo &, int [10]);
+void floor2b(playerInfo &, int [10]);
+void floor2c(playerInfo &, int [10]);
+void floor3a(playerInfo &, int [10]);
+void floor3b(playerInfo &, int [10]);
+void floor3c(playerInfo &, int [10]);
+void floor3(playerInfo &, int [10]);
 int playerDirection();
+void playerInputValidation(playerInfo &, int);
 
 void introduction(playerInfo &);
 
@@ -49,7 +50,7 @@ int main() {
         {"Rock Lobster", 100, 10}
 
     };
-
+    int roomstate[8];
 
     introduction(player);
    int test = 0;
@@ -71,37 +72,49 @@ int monsterSelect() {
     unsigned seed;
     seed = time(0);
     srand(seed);
-    
-    
+   
     monsterRandom = rand()%5;
-    
-    
 
     switch(monsterRandom) {
         case 0:
             return 0;
-
         case 1:
             return 1;
-
         case 2:
             return 2;
-
         case 3:
             return 3;
-
         case 4:
             return 4;
-
         default:
             break;
     }
     return 0;
 }
 
-//char playerInputValidation () {
+void playerInputValidation (playerInfo &player, int set) {
+    int intChoice =0;
+    string invalid = "Invalid selection, please try again.";
+    //room3
+    if(set ==30) {
+        while(true) {
+            cin >> intChoice;
+            if(intChoice==1) {
+                cout << "Haha well then " << player.name << ", prepare to join us in an eternal sleep as this dungeon consumes you!" << endl;
+                return;
 
-//}
+            } else if (intChoice ==2) {
+                cout << "I can see your family crest from here you fool, " << player.name << " of the royal family. Your King has doomed our lost souls to this dungeon, and now we shall repay the favor in kind." << endl;             
+                return;
+
+            } else {
+                cout << invalid << endl;
+            }
+        }
+    }
+
+
+}
 
 
 void introduction(playerInfo &player) {
@@ -112,33 +125,37 @@ void introduction(playerInfo &player) {
     cout << "Well then, " << player.name << ", steel your blade against the darkness and forge on ahead!" << endl;
 }
 
-int floor3() {
-    cout << "You peer into the darkness of the room, and suddenly a specter appears before you. His smile sends chills down to your soul. \"What is your name adventurer\?\"" << endl;
-    cout << "1 - State your name proudly\n2 - Keep weary of the ghastly ghoul and say nothing" << endl;
+
+
+
+void floor3(playerInfo &player, int roomstate[8]) {
+    cout << "You peer into the darkness of the room, and suddenly a specter appears before you. His wide smile sends chills down to your soul. \"What is your name adventurer\?\"" << endl;
+    cout << "1 - State your name proudly\n2 - Keep wary of the ghastly ghoul and say nothing" << endl;
+    playerInputValidation(player, 30);
 
 }
-void floor3a() {
+void floor3a(playerInfo &player, int roomstate[8]) {
     
 }
-void floor3b() {
+void floor3b(playerInfo &player, int roomstate[8]) {
     
 }
-void floor3c() {
+void floor3c(playerInfo &player, int roomstate[8]) {
     
 }
-void floor2a() {
+void floor2a(playerInfo &player, int roomstate[8]) {
     
 }
-void floor2b() {
+void floor2b(playerInfo &player, int roomstate[8]) {
     
 }
 
 // Specification B3 - Add more rooms
-void floor2c() {
+void floor2c(playerInfo &player, int roomstate[8]) {
     
 }
 
 // Specification C1
-void floor1() {
+void floor1(playerInfo &player, int roomstate[8]) {
 
 }
